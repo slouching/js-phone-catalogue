@@ -1,6 +1,9 @@
-export default class PhoneCatalog {
+import Component from '../../common/component.js';
+
+export default class PhoneCatalog extends Component {
     constructor({ element, phones }) {
-        this._element = element;
+        super({ element });
+
         this._phones = phones;
 
         this._render();
