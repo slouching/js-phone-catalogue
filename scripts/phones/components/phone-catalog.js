@@ -1,12 +1,12 @@
 import Component from '../../common/component.js';
 
 export default class PhoneCatalog extends Component {
-    constructor({ element, phones }) {
+    constructor({ element }) {
         super({ element });
 
-        this._phones = phones;
+        // this._phones = phones;
 
-        this._render();
+        // this._render();
 
         this.on('click', '[data-element="phone-link"]', (event) => {
             event.preventDefault();
@@ -23,6 +23,12 @@ export default class PhoneCatalog extends Component {
             this._trigger('addToShoppingCart', phoneElement.dataset.phoneId);
         })
 
+    }
+
+    showPhones(phones) {
+        this._phones = phones;
+        this._render();
+        this.show();
     }
 
     _render() {
