@@ -2,14 +2,14 @@ import HttpService from '../../common/services/http-service.js';
 
 const PhoneService = {
     getPhones(callback) {
-        HttpService.sendRequest('/phones/phones.json', {
+        HttpService.sendRequest('/phones.json', {
             errorCallback: () => {},
             successCallback: callback,
         });
     },
 
     getPhone(phoneId, callback) {
-        HttpService.sendRequest(`/phones/${phoneId}.json`, {
+        HttpService.sendRequest(`/${phoneId}.json`, {
             errorCallback: () => {},
             successCallback: callback,
         });
