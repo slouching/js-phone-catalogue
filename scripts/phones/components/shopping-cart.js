@@ -5,35 +5,46 @@ export default class ShoppingCart extends Component {
         super({element});
         this._element = element;
 
-        this._items = [];
+        this._items = {};
+
+        this._render();
+
+        this.on('click', '[data-element="button-remove"]', (event) => {
+            this.removeItem(event.delegateTarget.dataset.item)
+        })
+    }
+
+    addItem(item) {
+        if(!this._items[item]) {
+            this._items[item] = 0;
+        }
+
+        this._items[item]++;
 
         this._render();
     }
 
-    addItems(item) {
-        this._items.push(item);
+    removeItem(item) {
+        let { _items } = this
+        if(_items[item]) {
+            _items[item]--;
+        }
+
+        if(_items[item] === 0) {
+            delete _items[item];
+        }
 
         this._render();
     }
 
     _render() {
-        let cartContent;
-
-        if(this._items.length === 0) {
-            cartContent = `<p>No items in cart</p>`
-        } else {
-            cartContent = `
-                <ul>
-                    ${this._items.map(item => `
-                        <li>${item}<button>x</button></li>
-                    `).join('')}
-                </ul>
-            `
-        }
-
         this._element.innerHTML = `
-        <p>Shopping Cart</p>
-        ${cartContent}
-        `
+            <p>Shopping Cart</p>
+            <ul>
+                ${Object.entries(this._items).map(([name, count]) => `
+                    <li>${name} (${count}) <button data-item="${name}" data-element="button-remove">x</button></li>
+                `).join('')}
+            </ul>
+        `;
     }
 }

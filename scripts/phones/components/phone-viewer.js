@@ -9,7 +9,7 @@ export default class PhoneViewer extends Component {
         })
 
         this.on('click', '[data-element="button-add"]', (event) => {
-            this._trigger('add', this._phone.id);
+            this._trigger('addToShoppingCart', this._phone.id);
         })
 
     }

@@ -8,17 +8,21 @@ export default class PhoneCatalog extends Component {
 
         this._render();
 
-        this.on('click', '[data-element="phone-link"]', (event) => this._onPhoneClick(event));
+        this.on('click', '[data-element="phone-link"]', (event) => {
+            event.preventDefault();
 
+            let phoneLink = event.delegateTarget;
+            let phoneElement = phoneLink.closest('[data-element="phone"]');
 
-    }
+            this._trigger('phoneSelected', phoneElement.dataset.phoneId);
+        });
 
-    _onPhoneClick(event) {
-        event.preventDefault();
+        this.on('click', '[data-element="button-add"]', (event) => {
+            let phoneElement = event.delegateTarget.closest('[data-element="phone"]')
 
-        let phoneLink = event.delegateTarget;
+            this._trigger('addToShoppingCart', phoneElement.dataset.phoneId);
+        })
 
-        this._trigger('phoneSelected', phoneLink.dataset.phoneId);
     }
 
     _render() {
@@ -27,18 +31,18 @@ export default class PhoneCatalog extends Component {
             ${
                 this._phones.map(phone => `   
                 
-                <li class="thumbnail">
-                    <a data-element="phone-link" data-phone-id="${phone.id}" href="#!/phones/${phone.id}" class="thumb">
+                <li data-phone-id="${phone.id}" data-element="phone" class="thumbnail">
+                    <a data-element="phone-link" href="#!/phones/${phone.id}" class="thumb">
                         <img alt="${phone.name}" src="${phone.imageUrl}">
                     </a>
 
                     <div class="phones__btn-buy-wrapper">
-                        <a class="btn btn-success">
+                        <a class="btn btn-success" data-element="button-add">
                             Add
                         </a>
                     </div>
 
-                    <a data-element="phone-link" data-phone-id="${phone.id}" href="#!/phones/${phone.id}">${phone.name}</a>
+                    <a data-element="phone-link" href="#!/phones/${phone.id}">${phone.name}</a>
                     <p>${phone.snippet}</p>
                 </li>
                 `).join('')
