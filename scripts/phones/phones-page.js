@@ -30,7 +30,7 @@ export default class PhonesPage {
         })
 
         this._catalog.on('phoneSelected', (event) => {
-            let phone = PhoneService.getPhones(event.detail.phoneId);
+            let phone = PhoneService.getPhone(event.detail.phoneId);
 
             this._catalog.hide();
             this._viewer.showPhone(phone);
@@ -45,6 +45,12 @@ export default class PhonesPage {
         this._viewer.on('back', () => {
             this._catalog.show();
             this._viewer.hide();
+        })
+
+        this._viewer.on('add', (event) => {
+            let phoneId = event.detail;
+
+            this._shoppingCart.addItems(phoneId);
         })
 
     }

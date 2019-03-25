@@ -4,6 +4,14 @@ export default class PhoneViewer extends Component {
     constructor({ element }) {
         super({ element });
 
+        this.on('click', '[data-element="button-back"]', (event) => {
+            this._trigger('back');
+        })
+
+        this.on('click', '[data-element="button-add"]', (event) => {
+            this._trigger('add', this._phone.id);
+        })
+
     }
 
     showPhone(phone) {
@@ -12,15 +20,8 @@ export default class PhoneViewer extends Component {
 
         super.show();
 
-        this.on('click', (event) => {
-            let backButton = event.target.closest('[data-element="button-back"]');
-
-            if(!backButton) return;
-
-            let customEvent = new CustomEvent('back');
-            this._element.dispatchEvent(customEvent);
-        })
     }
+
 
     _render() {
         this._element.innerHTML = `

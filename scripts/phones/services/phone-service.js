@@ -222,7 +222,7 @@ const phoneFromServer = {
 
 const PhoneService = {
     getPhones() { return phones; },
-    phone (phoneId) { return phoneFromServer; }
+    getPhone(phoneId) { return phoneFromServer; }
 }
 
 export default PhoneService

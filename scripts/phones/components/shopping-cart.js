@@ -5,17 +5,35 @@ export default class ShoppingCart extends Component {
         super({element});
         this._element = element;
 
+        this._items = [];
+
+        this._render();
+    }
+
+    addItems(item) {
+        this._items.push(item);
+
         this._render();
     }
 
     _render() {
+        let cartContent;
+
+        if(this._items.length === 0) {
+            cartContent = `<p>No items in cart</p>`
+        } else {
+            cartContent = `
+                <ul>
+                    ${this._items.map(item => `
+                        <li>${item}<button>x</button></li>
+                    `).join('')}
+                </ul>
+            `
+        }
+
         this._element.innerHTML = `
         <p>Shopping Cart</p>
-        <ul>
-            <li>Phone 1</li>
-            <li>Phone 2</li>
-            <li>Phone 3</li>
-        </ul>
+        ${cartContent}
         `
     }
 }
