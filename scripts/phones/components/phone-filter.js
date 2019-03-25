@@ -1,0 +1,27 @@
+import Component from '../../common/component.js';
+
+export default class PhoneFilter extends Component {
+    constructor({element}) {
+        super({element});
+        this._element = element;
+
+        this._render();
+    }
+
+    _render() {
+        this._element.innerHTML = `
+        <p>
+            Search:
+            <input>
+        </p>
+
+        <p>
+            Sort by:
+            <select>
+                <option value="name">Alphabetical</option>
+                <option value="age">Newest</option>
+            </select>
+        </p>
+        `
+    }
+}

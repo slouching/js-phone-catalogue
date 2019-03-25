@@ -4,9 +4,6 @@ export default class PhoneViewer extends Component {
     constructor({ element }) {
         super({ element });
 
-
-        // this._render();
-
     }
 
     showPhone(phone) {

@@ -1,0 +1,21 @@
+import Component from '../../common/component.js';
+
+export default class ShoppingCart extends Component {
+    constructor({element}) {
+        super({element});
+        this._element = element;
+
+        this._render();
+    }
+
+    _render() {
+        this._element.innerHTML = `
+        <p>Shopping Cart</p>
+        <ul>
+            <li>Phone 1</li>
+            <li>Phone 2</li>
+            <li>Phone 3</li>
+        </ul>
+        `
+    }
+}
