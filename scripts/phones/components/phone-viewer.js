@@ -11,19 +11,28 @@ export default class PhoneViewer extends Component {
         this._render();
 
         super.show();
+
+        this.on('click', (event) => {
+            let backButton = event.target.closest('[data-element="button-back"]');
+
+            if(!backButton) return;
+
+            let customEvent = new CustomEvent('back');
+            this._element.dispatchEvent(customEvent);
+        })
     }
 
     _render() {
         this._element.innerHTML = `
             <img class="phone" src="img/phones/motorola-xoom-with-wi-fi.0.jpg">
         
-            <button>Back</button>
-            <button>Add to basket</button>
+            <button data-element="button-back">Back</button>
+            <button data-element="button-add">Add to basket</button>
         
         
-            <h1>${ this._phone.name }</h1>
+            <h1>${this._phone.name}</h1>
         
-            <p>${ this._phone.description }</p>
+            <p>${this._phone.description}</p>
         
             <ul class="phone-thumbs">
               <li>
