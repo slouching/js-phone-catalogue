@@ -29,15 +29,17 @@ export default class PhonesPage {
 
         })
 
-        PhoneService.getPhones((phones) => {
-            this._catalog.showPhones(phones);
-        })
+        PhoneService.getPhones()
+            .then((phones) => {
+                this._catalog.showPhones(phones);
+            });
 
         this._catalog.on('phoneSelected', (event) => {
-            let phone = PhoneService.getPhone(event.detail, (phone) => {
-                this._catalog.hide();
-                this._viewer.showPhone(phone);
-            });
+            let phone = PhoneService.getPhone(event.detail)
+                .then((phone) => {
+                    this._catalog.hide();
+                    this._viewer.showPhone(phone);
+                });
         })
 
         this._catalog.on('addToShoppingCart', (event) => {
