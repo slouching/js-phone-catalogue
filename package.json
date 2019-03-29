@@ -2,10 +2,11 @@
   "name": "phone-catalogue-static",
   "version": "1.0.0",
   "description": "Static pages of phone catalogue",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,15 @@
   },
   "homepage": "https://github.com/slouching/js-phone-catalogue#readme",
   "devDependencies": {
-    "express": "^4.16.4"
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "babel-loader": "^8.0.5",
+    "express": "^4.16.4",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.4.2"
   }
 }
