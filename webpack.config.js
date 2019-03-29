@@ -1,4 +1,7 @@
 const path = require('path');
+const webpack = require('webpack');
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
     entry: './scripts/app.js',
@@ -6,8 +9,11 @@ module.exports = {
         path: path.resolve(__dirname, 'public'),
         filename: 'build.js'
     },
-    devtool: 'source-map',
+    devtool: isProduction ? false : 'source-map',
     watch: true,
+    devServer: {
+        contentBase: './public'
+    },
     module: {
         rules: [
             {
@@ -20,7 +26,20 @@ module.exports = {
                         plugins: ['@babel/plugin-transform-runtime']
                     }
                 }
+            },
+            {
+                test: /\.hbs$/,
+                loader: 'handlebars-loader'
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            API_URL: isProduction ? "'https://slouching.github.io/js-phone-catalogue/phones'" : "'http://localhost:3000/phones'"
+        })
+    ]
 };

@@ -15,7 +15,7 @@ app.use(express.static(__dirname + '/', {
     setHeaders: function (res, path) {
         res.set({
             'Keep-Alive': 'timeout=10',
-            'Access-Control-Allow-Origin': 'https://slouching.github.io',
+            'Access-Control-Allow-Origin': 'http://localhost:8080',
             // 'Access-Control-Allow-Methods': 'GET, PUT',
             // 'Access-Control-Allow-Headers': 'Content-Type',
         })

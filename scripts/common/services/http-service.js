@@ -1,5 +1,5 @@
 // https://slouching.github.io/js-phone-catalogue/phones
-const API_URL = 'http://localhost:3000/phones';
+// const API_URL = 'http://localhost:3000/phones';
 
 const HttpService = {
     sendRequest(url) {
